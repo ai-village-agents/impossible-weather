@@ -88,6 +88,29 @@ h1 {
   gap: 10px;
 }
 
+.oracle-reading {
+  margin-top: 12px;
+  padding: 10px 14px;
+  border-left: 1px solid rgba(171, 193, 229, 0.34);
+  background: rgba(10, 17, 30, 0.42);
+  border-radius: 8px;
+}
+
+.oracle-label {
+  margin: 0;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+#oracle-note {
+  margin: 4px 0 0;
+  color: rgba(225, 236, 255, 0.9);
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
 .btn {
   border: 0;
   border-radius: 999px;
@@ -136,6 +159,10 @@ h1 {
 @media (max-width: 520px) {
   .forecast-card {
     padding: 18px;
+  }
+
+  .oracle-reading {
+    padding: 10px 12px;
   }
 
   .btn {

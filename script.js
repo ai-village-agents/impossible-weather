@@ -50,32 +50,40 @@ const air = [
 ];
 
 const advisories = [
-  { text: "Carry a light; the shadows are working overtime.", tags: ["inland", "highland"] },
-  { text: "Leave five extra minutes for wonder and wet stairs.", tags: ["harbor", "coastal"] },
-  { text: "Keep your coat close and your plans adjustable.", tags: ["inland", "open"] },
-  { text: "Tonight favors patient travelers and quiet shoes.", tags: ["ceremonial", "inland"] },
-  { text: "Windows should be latched before the second bell.", tags: ["ceremonial", "industrial"] },
-  { text: "Watch for slick stone where the lamps go thin.", tags: ["highland", "inland"] },
-  { text: "Tea is recommended; certainty is optional.", tags: ["ceremonial", "inland"] },
-  { text: "If you hear distant chimes, take the longer road home.", tags: ["highland", "ceremonial"] },
-  { text: "Umbrellas may invert, but spirits need not.", tags: ["coastal", "harbor"] },
-  { text: "Secure loose pages; the wind is collecting stories.", tags: ["open", "inland"] },
-  { text: "Mariners should trust lanterns more than horizons.", tags: ["harbor", "coastal"] },
-  { text: "Expect delays near bridges and improbable birds.", tags: ["river", "harbor"] },
-  { text: "Best hour for departures: after the rain remembers your name.", tags: ["coastal", "inland"] },
-  { text: "Report any sudden sunshine to the nearest attendant.", tags: ["industrial", "ceremonial"] }
+  { text: "Carry a light; the shadows are working overtime.", tags: ["inland", "highland"], tone: "cautionary" },
+  { text: "Leave five extra minutes for wonder and wet stairs.", tags: ["harbor", "coastal"], tone: "ordinary" },
+  { text: "Keep your coat close and your plans adjustable.", tags: ["inland", "open"], tone: "ordinary" },
+  { text: "Tonight favors patient travelers and quiet shoes.", tags: ["ceremonial", "inland"], tone: "ordinary" },
+  { text: "Windows should be latched before the second bell.", tags: ["ceremonial", "industrial"], tone: "cautionary" },
+  { text: "Watch for slick stone where the lamps go thin.", tags: ["highland", "inland"], tone: "cautionary" },
+  { text: "Tea is recommended; certainty is optional.", tags: ["ceremonial", "inland"], tone: "ordinary" },
+  { text: "If you hear distant chimes, take the longer road home.", tags: ["highland", "ceremonial"], tone: "uncanny" },
+  { text: "Umbrellas may invert, but spirits need not.", tags: ["coastal", "harbor"], tone: "ordinary" },
+  { text: "Secure loose pages; the wind is collecting stories.", tags: ["open", "inland"], tone: "cautionary" },
+  { text: "Mariners should trust lanterns more than horizons.", tags: ["harbor", "coastal"], tone: "cautionary" },
+  { text: "Expect delays near bridges and improbable birds.", tags: ["river", "harbor"], tone: "cautionary" },
+  { text: "Best hour for departures: after the rain remembers your name.", tags: ["coastal", "inland"], tone: "uncanny" },
+  { text: "Report any sudden sunshine to the nearest attendant.", tags: ["industrial", "ceremonial"], tone: "uncanny" }
 ];
+
+const toneInterpretations = {
+  ordinary: "Flavor only; no mechanical effect.",
+  cautionary: "Mild penalty or short delay.",
+  uncanny: "Rare event or unusual opportunity."
+};
 
 const linePlace = document.getElementById("line-place");
 const lineSky = document.getElementById("line-sky");
 const lineAir = document.getElementById("line-air");
 const lineAdvisory = document.getElementById("line-advisory");
+const oracleNote = document.getElementById("oracle-note");
 const forecastButton = document.getElementById("forecast-btn");
 const copyButton = document.getElementById("copy-btn");
 const copyLinkButton = document.getElementById("copy-link-btn");
 const copyStatus = document.getElementById("copy-status");
 const SEED_PARAM = "seed";
 let currentSeed = "";
+let currentOracleSentence = "";
 
 function fnv1a(input) {
   let hash = 2166136261;
@@ -172,17 +180,25 @@ function resetLineAnimation() {
   }
 }
 
+function toTitleCase(value) {
+  return `${value.charAt(0).toUpperCase()}${value.slice(1)}`;
+}
+
 function buildForecast(seed) {
   const random = mulberry32(fnv1a(seed));
   const place = pickBySeed(places, random);
   const sky = pickForPlace(skies, place.tags, random);
   const atmosphere = pickForPlace(air, place.tags, random);
   const advisory = pickForPlace(advisories, place.tags, random);
+  const toneLabel = toTitleCase(advisory.tone);
+  const toneInterpretation = toneInterpretations[advisory.tone];
 
   linePlace.textContent = `Forecast for ${place.name}:`;
   lineSky.textContent = sky.text;
   lineAir.textContent = atmosphere.text;
   lineAdvisory.textContent = advisory.text;
+  currentOracleSentence = `${toneLabel} omen \u2014 ${toneInterpretation}`;
+  oracleNote.textContent = currentOracleSentence;
 
   resetLineAnimation();
 }
@@ -197,7 +213,8 @@ function renderForecastForSeed(seed) {
 function getForecastText() {
   return [linePlace, lineSky, lineAir, lineAdvisory]
     .map((line) => line.textContent.trim())
-    .join("\n");
+    .join("\n")
+    .concat(`\n\nOracle reading: ${currentOracleSentence}`);
 }
 
 async function copyForecast() {
