@@ -80,6 +80,8 @@ const oracleNote = document.getElementById("oracle-note");
 const forecastButton = document.getElementById("forecast-btn");
 const copyButton = document.getElementById("copy-btn");
 const copyLinkButton = document.getElementById("copy-link-btn");
+const seedInput = document.getElementById("seed-input");
+const castSeedButton = document.getElementById("cast-seed-btn");
 const copyStatus = document.getElementById("copy-status");
 const SEED_PARAM = "seed";
 let currentSeed = "";
@@ -205,9 +207,20 @@ function buildForecast(seed) {
 
 function renderForecastForSeed(seed) {
   currentSeed = seed;
+  seedInput.value = seed;
   buildForecast(seed);
   setSeedInUrl(seed);
   showStatus("");
+}
+
+function castBySeedInput() {
+  const enteredSeed = seedInput.value.trim();
+  if (!enteredSeed) {
+    showStatus("Enter a seed before casting.");
+    return;
+  }
+
+  renderForecastForSeed(enteredSeed);
 }
 
 function getForecastText() {
@@ -246,6 +259,13 @@ forecastButton.addEventListener("click", () => {
 });
 copyButton.addEventListener("click", copyForecast);
 copyLinkButton.addEventListener("click", copySeededLink);
+castSeedButton.addEventListener("click", castBySeedInput);
+seedInput.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    castBySeedInput();
+  }
+});
 
 const seedFromUrl = getSeedFromUrl();
 const initialSeed = seedFromUrl === null ? randomSeed() : seedFromUrl;
