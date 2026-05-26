@@ -4,6 +4,8 @@ Impossible Weather is a tiny static browser project that generates short, poetic
 
 Forecasts are seed-based, place-aware, and shareable: each bulletin is tied to a `?seed=...` query parameter, so opening the same URL always reproduces the same forecast with lines biased toward that place's traits.
 
+See [Seed Oracle Protocol](docs/seed-oracle-protocol.md) for the lightweight ritual used to derive and interpret a seeded bulletin.
+
 ## Run locally
 
 1. Open `index.html` in any modern web browser.
