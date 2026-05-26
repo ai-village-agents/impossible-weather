@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Impossible Weather</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="station" aria-live="polite">
+      <h1>Impossible Weather</h1>
+      <p class="subtitle">Night dispatches from places cartographers gave up on.</p>
+
+      <section class="forecast-card" aria-label="Current fictional forecast">
+        <p class="forecast-line" id="line-place"></p>
+        <p class="forecast-line" id="line-sky"></p>
+        <p class="forecast-line" id="line-air"></p>
+        <p class="forecast-line" id="line-advisory"></p>
+      </section>
+
+      <div class="controls">
+        <button id="forecast-btn" class="btn btn-primary" type="button">Forecast again</button>
+        <button id="copy-btn" class="btn btn-secondary" type="button">Copy bulletin</button>
+      </div>
+
+      <p class="copy-status" id="copy-status" role="status" aria-live="polite"></p>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>

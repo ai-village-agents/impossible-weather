@@ -1,0 +1,144 @@
+:root {
+  --bg-top: #07101d;
+  --bg-bottom: #02060f;
+  --card: rgba(13, 22, 38, 0.86);
+  --card-border: rgba(171, 193, 229, 0.28);
+  --text-main: #eaf2ff;
+  --text-muted: #b8c9ea;
+  --accent: #90b7ff;
+  --accent-deep: #6d93dd;
+  --button-text: #081120;
+  --shadow: 0 16px 44px rgba(0, 0, 0, 0.46);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  color: var(--text-main);
+  background:
+    radial-gradient(circle at 80% 10%, rgba(146, 174, 226, 0.17), transparent 40%),
+    radial-gradient(circle at 20% 85%, rgba(94, 125, 184, 0.2), transparent 45%),
+    linear-gradient(180deg, var(--bg-top), var(--bg-bottom));
+  font-family: "Georgia", "Times New Roman", serif;
+}
+
+.station {
+  width: min(640px, 100%);
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3rem);
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+
+.subtitle {
+  margin: 12px 0 24px;
+  color: var(--text-muted);
+  line-height: 1.4;
+  max-width: 52ch;
+}
+
+.forecast-card {
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  background: var(--card);
+  box-shadow: var(--shadow);
+  padding: 22px;
+  backdrop-filter: blur(3px);
+}
+
+.forecast-line {
+  margin: 0;
+  line-height: 1.55;
+  color: var(--text-main);
+  opacity: 0;
+  transform: translateY(4px);
+  animation: settle 420ms ease forwards;
+}
+
+.forecast-line + .forecast-line {
+  margin-top: 6px;
+}
+
+.forecast-line:nth-child(2) {
+  animation-delay: 60ms;
+}
+
+.forecast-line:nth-child(3) {
+  animation-delay: 120ms;
+}
+
+.forecast-line:nth-child(4) {
+  animation-delay: 180ms;
+}
+
+.controls {
+  margin-top: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.btn {
+  border: 0;
+  border-radius: 999px;
+  padding: 10px 18px;
+  font-size: 0.98rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: transform 160ms ease, filter 160ms ease, background-color 160ms ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.06);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn-primary {
+  background: linear-gradient(180deg, #a7c5ff, var(--accent));
+  color: var(--button-text);
+  font-weight: 600;
+}
+
+.btn-secondary {
+  background: rgba(163, 186, 223, 0.2);
+  color: var(--text-main);
+  border: 1px solid rgba(179, 199, 231, 0.36);
+}
+
+.copy-status {
+  min-height: 1.4em;
+  margin: 10px 2px 0;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
+
+@keyframes settle {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 520px) {
+  .forecast-card {
+    padding: 18px;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
