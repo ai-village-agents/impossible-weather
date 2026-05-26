@@ -1,69 +1,69 @@
 const places = [
-  "Gullwhisper Spit",
-  "The Ninth Lantern Archipelago",
-  "Cinderwell Station",
-  "Mothglass Harbor",
-  "Salt Cathedral",
-  "Old Meridian Hollow",
-  "The Ink Plains",
-  "Bracken Moon Ferry",
-  "Rook & Tide",
-  "Velvet Quarry",
-  "Nocturne Crossing",
-  "Pale Engine Bay",
-  "Fogkeeper's Reach",
-  "Hearthless Peninsula"
+  { name: "Gullwhisper Spit", tags: ["coastal", "harbor"] },
+  { name: "The Ninth Lantern Archipelago", tags: ["coastal", "ceremonial"] },
+  { name: "Cinderwell Station", tags: ["industrial", "inland"] },
+  { name: "Mothglass Harbor", tags: ["harbor", "ceremonial"] },
+  { name: "Salt Cathedral", tags: ["coastal", "ceremonial"] },
+  { name: "Old Meridian Hollow", tags: ["inland", "highland"] },
+  { name: "The Ink Plains", tags: ["inland", "open"] },
+  { name: "Bracken Moon Ferry", tags: ["river", "harbor"] },
+  { name: "Rook & Tide", tags: ["coastal", "industrial"] },
+  { name: "Velvet Quarry", tags: ["industrial", "highland"] },
+  { name: "Nocturne Crossing", tags: ["inland", "ceremonial"] },
+  { name: "Pale Engine Bay", tags: ["industrial", "harbor"] },
+  { name: "Fogkeeper's Reach", tags: ["coastal", "highland"] },
+  { name: "Hearthless Peninsula", tags: ["coastal", "inland"] }
 ];
 
 const skies = [
-  "A low ceiling of moonlit ash drifts over the district.",
-  "Thin rain threads the dark like loose silver wire.",
-  "Cloudbanks glow faintly, as if lit from underwater.",
-  "The stars have gone behind bruised slate and will not answer.",
-  "A clear interval opens briefly, then folds shut again.",
-  "Pearl-gray mist climbs the rooftops before dawn can object.",
-  "Lantern-colored clouds linger at the edge of the bay.",
-  "A patient overcast settles in and refuses departure.",
-  "Cold light leaks through fractured cloud in narrow bands.",
-  "The horizon burns amber, then dims to ink.",
-  "Storm glass tones gather without thunder yet.",
-  "High cirrus trails resemble handwriting nobody can read.",
-  "Snowlight hangs in the air though no flakes commit.",
-  "Night fog beads on windows like unfinished constellations."
+  { text: "A low ceiling of moonlit ash drifts over the district.", tags: ["industrial", "inland"] },
+  { text: "Thin rain threads the dark like loose silver wire.", tags: ["coastal", "harbor"] },
+  { text: "Cloudbanks glow faintly, as if lit from underwater.", tags: ["coastal", "ceremonial"] },
+  { text: "The stars have gone behind bruised slate and will not answer.", tags: ["highland", "inland"] },
+  { text: "A clear interval opens briefly, then folds shut again.", tags: ["inland", "open"] },
+  { text: "Pearl-gray mist climbs the rooftops before dawn can object.", tags: ["harbor", "inland"] },
+  { text: "Lantern-colored clouds linger at the edge of the bay.", tags: ["harbor", "ceremonial"] },
+  { text: "A patient overcast settles in and refuses departure.", tags: ["inland", "industrial"] },
+  { text: "Cold light leaks through fractured cloud in narrow bands.", tags: ["highland", "inland"] },
+  { text: "The horizon burns amber, then dims to ink.", tags: ["open", "inland"] },
+  { text: "Storm glass tones gather without thunder yet.", tags: ["coastal", "industrial"] },
+  { text: "High cirrus trails resemble handwriting nobody can read.", tags: ["highland", "ceremonial"] },
+  { text: "Snowlight hangs in the air though no flakes commit.", tags: ["highland", "inland"] },
+  { text: "Night fog beads on windows like unfinished constellations.", tags: ["harbor", "coastal"] }
 ];
 
 const air = [
-  "Wind moves east at a librarian's pace, turning signs one syllable at a time.",
-  "Harbor gusts arrive in polite bursts, then retreat to listen.",
-  "The air carries iron, wet cedar, and a rumor of lightning.",
-  "Pressure falls gently; doors may speak in their hinges.",
-  "A river-cold draft crosses the streets and edits every conversation.",
-  "Warmth rises from cobblestone vents, meeting the chill halfway.",
-  "Northern currents comb the cranes and leave a violin hum.",
-  "Static gathers in coat sleeves and in unspoken decisions.",
-  "Sea breath rolls inland, salt-rich and deliberate.",
-  "The atmosphere is still enough to hear clock towers blink.",
-  "Crosswinds braid over the bridge with careful hands.",
-  "Anise-sweet haze lingers low, softening distant engines.",
-  "The barometer steadies, but the alleys keep their weather.",
-  "Dry currents from the interior make paper maps curl at the corners."
+  { text: "Wind moves east at a librarian's pace, turning signs one syllable at a time.", tags: ["inland", "ceremonial"] },
+  { text: "Harbor gusts arrive in polite bursts, then retreat to listen.", tags: ["harbor", "coastal"] },
+  { text: "The air carries iron, wet cedar, and a rumor of lightning.", tags: ["industrial", "highland"] },
+  { text: "Pressure falls gently; doors may speak in their hinges.", tags: ["inland", "ceremonial"] },
+  { text: "A river-cold draft crosses the streets and edits every conversation.", tags: ["river", "inland"] },
+  { text: "Warmth rises from cobblestone vents, meeting the chill halfway.", tags: ["industrial", "inland"] },
+  { text: "Northern currents comb the cranes and leave a violin hum.", tags: ["industrial", "harbor"] },
+  { text: "Static gathers in coat sleeves and in unspoken decisions.", tags: ["highland", "industrial"] },
+  { text: "Sea breath rolls inland, salt-rich and deliberate.", tags: ["coastal", "harbor"] },
+  { text: "The atmosphere is still enough to hear clock towers blink.", tags: ["ceremonial", "inland"] },
+  { text: "Crosswinds braid over the bridge with careful hands.", tags: ["river", "harbor"] },
+  { text: "Anise-sweet haze lingers low, softening distant engines.", tags: ["industrial", "coastal"] },
+  { text: "The barometer steadies, but the alleys keep their weather.", tags: ["inland", "industrial"] },
+  { text: "Dry currents from the interior make paper maps curl at the corners.", tags: ["inland", "open"] }
 ];
 
 const advisories = [
-  "Carry a light; the shadows are working overtime.",
-  "Leave five extra minutes for wonder and wet stairs.",
-  "Keep your coat close and your plans adjustable.",
-  "Tonight favors patient travelers and quiet shoes.",
-  "Windows should be latched before the second bell.",
-  "Watch for slick stone where the lamps go thin.",
-  "Tea is recommended; certainty is optional.",
-  "If you hear distant chimes, take the longer road home.",
-  "Umbrellas may invert, but spirits need not.",
-  "Secure loose pages; the wind is collecting stories.",
-  "Mariners should trust lanterns more than horizons.",
-  "Expect delays near bridges and improbable birds.",
-  "Best hour for departures: after the rain remembers your name.",
-  "Report any sudden sunshine to the nearest attendant."
+  { text: "Carry a light; the shadows are working overtime.", tags: ["inland", "highland"] },
+  { text: "Leave five extra minutes for wonder and wet stairs.", tags: ["harbor", "coastal"] },
+  { text: "Keep your coat close and your plans adjustable.", tags: ["inland", "open"] },
+  { text: "Tonight favors patient travelers and quiet shoes.", tags: ["ceremonial", "inland"] },
+  { text: "Windows should be latched before the second bell.", tags: ["ceremonial", "industrial"] },
+  { text: "Watch for slick stone where the lamps go thin.", tags: ["highland", "inland"] },
+  { text: "Tea is recommended; certainty is optional.", tags: ["ceremonial", "inland"] },
+  { text: "If you hear distant chimes, take the longer road home.", tags: ["highland", "ceremonial"] },
+  { text: "Umbrellas may invert, but spirits need not.", tags: ["coastal", "harbor"] },
+  { text: "Secure loose pages; the wind is collecting stories.", tags: ["open", "inland"] },
+  { text: "Mariners should trust lanterns more than horizons.", tags: ["harbor", "coastal"] },
+  { text: "Expect delays near bridges and improbable birds.", tags: ["river", "harbor"] },
+  { text: "Best hour for departures: after the rain remembers your name.", tags: ["coastal", "inland"] },
+  { text: "Report any sudden sunshine to the nearest attendant.", tags: ["industrial", "ceremonial"] }
 ];
 
 const linePlace = document.getElementById("line-place");
@@ -98,6 +98,40 @@ function mulberry32(seedValue) {
 
 function pickBySeed(list, random) {
   return list[Math.floor(random() * list.length)];
+}
+
+function countTagOverlap(a, b) {
+  let overlap = 0;
+  for (const tag of a) {
+    if (b.includes(tag)) {
+      overlap += 1;
+    }
+  }
+  return overlap;
+}
+
+function pickWeightedBySeed(list, weights, random) {
+  const totalWeight = weights.reduce((sum, weight) => sum + weight, 0);
+  let cursor = random() * totalWeight;
+
+  for (let i = 0; i < list.length; i += 1) {
+    cursor -= weights[i];
+    if (cursor <= 0) {
+      return list[i];
+    }
+  }
+
+  return list[list.length - 1];
+}
+
+function pickForPlace(options, placeTags, random) {
+  const surpriseChance = 0.18;
+  if (random() < surpriseChance) {
+    return pickBySeed(options, random);
+  }
+
+  const weights = options.map((option) => 1 + countTagOverlap(option.tags, placeTags) * 3);
+  return pickWeightedBySeed(options, weights, random);
 }
 
 function randomSeed() {
@@ -141,14 +175,14 @@ function resetLineAnimation() {
 function buildForecast(seed) {
   const random = mulberry32(fnv1a(seed));
   const place = pickBySeed(places, random);
-  const sky = pickBySeed(skies, random);
-  const atmosphere = pickBySeed(air, random);
-  const advisory = pickBySeed(advisories, random);
+  const sky = pickForPlace(skies, place.tags, random);
+  const atmosphere = pickForPlace(air, place.tags, random);
+  const advisory = pickForPlace(advisories, place.tags, random);
 
-  linePlace.textContent = `Forecast for ${place}:`;
-  lineSky.textContent = sky;
-  lineAir.textContent = atmosphere;
-  lineAdvisory.textContent = advisory;
+  linePlace.textContent = `Forecast for ${place.name}:`;
+  lineSky.textContent = sky.text;
+  lineAir.textContent = atmosphere.text;
+  lineAdvisory.textContent = advisory.text;
 
   resetLineAnimation();
 }

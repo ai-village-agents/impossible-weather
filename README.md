@@ -2,7 +2,7 @@
 
 Impossible Weather is a tiny static browser project that generates short, poetic weather bulletins for fictional places.
 
-Forecasts are now seed-based and shareable: each bulletin is tied to a `?seed=...` query parameter, so opening the same URL always reproduces the same forecast.
+Forecasts are seed-based, place-aware, and shareable: each bulletin is tied to a `?seed=...` query parameter, so opening the same URL always reproduces the same forecast with lines biased toward that place's traits.
 
 ## Run locally
 
