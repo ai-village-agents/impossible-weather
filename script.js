@@ -72,10 +72,61 @@ const lineAir = document.getElementById("line-air");
 const lineAdvisory = document.getElementById("line-advisory");
 const forecastButton = document.getElementById("forecast-btn");
 const copyButton = document.getElementById("copy-btn");
+const copyLinkButton = document.getElementById("copy-link-btn");
 const copyStatus = document.getElementById("copy-status");
+const SEED_PARAM = "seed";
+let currentSeed = "";
 
-function randomItem(list) {
-  return list[Math.floor(Math.random() * list.length)];
+function fnv1a(input) {
+  let hash = 2166136261;
+  for (let i = 0; i < input.length; i += 1) {
+    hash ^= input.charCodeAt(i);
+    hash = Math.imul(hash, 16777619);
+  }
+  return hash >>> 0;
+}
+
+function mulberry32(seedValue) {
+  let state = seedValue >>> 0;
+  return function next() {
+    state = (state + 0x6d2b79f5) >>> 0;
+    let value = Math.imul(state ^ (state >>> 15), state | 1);
+    value ^= value + Math.imul(value ^ (value >>> 7), value | 61);
+    return ((value ^ (value >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+function pickBySeed(list, random) {
+  return list[Math.floor(random() * list.length)];
+}
+
+function randomSeed() {
+  if (window.crypto && typeof window.crypto.getRandomValues === "function") {
+    const bytes = new Uint32Array(1);
+    window.crypto.getRandomValues(bytes);
+    return bytes[0].toString(36);
+  }
+
+  return Math.floor(Math.random() * Number.MAX_SAFE_INTEGER).toString(36);
+}
+
+function setSeedInUrl(seed) {
+  const url = new URL(window.location.href);
+  url.searchParams.set(SEED_PARAM, seed);
+  history.replaceState(null, "", `${url.pathname}${url.search}${url.hash}`);
+}
+
+function getSeedFromUrl() {
+  const url = new URL(window.location.href);
+  if (!url.searchParams.has(SEED_PARAM)) {
+    return null;
+  }
+
+  return url.searchParams.get(SEED_PARAM);
+}
+
+function showStatus(message) {
+  copyStatus.textContent = message;
 }
 
 function resetLineAnimation() {
@@ -87,11 +138,12 @@ function resetLineAnimation() {
   }
 }
 
-function buildForecast() {
-  const place = randomItem(places);
-  const sky = randomItem(skies);
-  const atmosphere = randomItem(air);
-  const advisory = randomItem(advisories);
+function buildForecast(seed) {
+  const random = mulberry32(fnv1a(seed));
+  const place = pickBySeed(places, random);
+  const sky = pickBySeed(skies, random);
+  const atmosphere = pickBySeed(air, random);
+  const advisory = pickBySeed(advisories, random);
 
   linePlace.textContent = `Forecast for ${place}:`;
   lineSky.textContent = sky;
@@ -99,7 +151,13 @@ function buildForecast() {
   lineAdvisory.textContent = advisory;
 
   resetLineAnimation();
-  copyStatus.textContent = "";
+}
+
+function renderForecastForSeed(seed) {
+  currentSeed = seed;
+  buildForecast(seed);
+  setSeedInUrl(seed);
+  showStatus("");
 }
 
 function getForecastText() {
@@ -111,13 +169,33 @@ function getForecastText() {
 async function copyForecast() {
   try {
     await navigator.clipboard.writeText(getForecastText());
-    copyStatus.textContent = "Bulletin copied to clipboard.";
+    showStatus("Bulletin copied to clipboard.");
   } catch (error) {
-    copyStatus.textContent = "Clipboard unavailable. Copy manually from the card.";
+    showStatus("Clipboard unavailable. Copy manually from the card.");
   }
 }
 
-forecastButton.addEventListener("click", buildForecast);
-copyButton.addEventListener("click", copyForecast);
+function getSeededUrl() {
+  const url = new URL(window.location.href);
+  url.searchParams.set(SEED_PARAM, currentSeed);
+  return url.toString();
+}
 
-buildForecast();
+async function copySeededLink() {
+  try {
+    await navigator.clipboard.writeText(getSeededUrl());
+    showStatus("Link copied to clipboard.");
+  } catch (error) {
+    showStatus("Clipboard unavailable. Copy link manually from the address bar.");
+  }
+}
+
+forecastButton.addEventListener("click", () => {
+  renderForecastForSeed(randomSeed());
+});
+copyButton.addEventListener("click", copyForecast);
+copyLinkButton.addEventListener("click", copySeededLink);
+
+const seedFromUrl = getSeedFromUrl();
+const initialSeed = seedFromUrl === null ? randomSeed() : seedFromUrl;
+renderForecastForSeed(initialSeed);
