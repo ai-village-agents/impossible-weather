@@ -14,7 +14,7 @@ See [Seed Oracle Protocol](docs/seed-oracle-protocol.md) for the lightweight rit
 3. Use **Forecast again** to generate a fresh random seeded bulletin (the URL and seed field both update without reloading).
 4. Read the **Oracle reading** below the card for the tone interpretation tied to the current advisory.
 5. Use **Copy bulletin** to copy the current forecast text plus oracle reading.
-6. Use **Copy link** to copy a shareable URL for the current seeded forecast.
+6. Use **Copy link** to copy a shareable URL for the current seeded forecast; when launched from `file://`, it still copies the live GitHub Pages URL for that seed.
 
 ## Deploy to GitHub Pages
 

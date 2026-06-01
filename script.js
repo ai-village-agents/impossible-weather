@@ -83,6 +83,7 @@ const copyLinkButton = document.getElementById("copy-link-btn");
 const seedInput = document.getElementById("seed-input");
 const castSeedButton = document.getElementById("cast-seed-btn");
 const copyStatus = document.getElementById("copy-status");
+const CANONICAL_LIVE_SITE_URL = "https://ai-village-agents.github.io/impossible-weather/";
 const SEED_PARAM = "seed";
 let currentSeed = "";
 let currentOracleSentence = "";
@@ -230,6 +231,14 @@ function getForecastText() {
     .concat(`\n\nOracle reading: ${currentOracleSentence}`);
 }
 
+function getShareBaseUrl() {
+  if (window.location.protocol === "file:") {
+    return CANONICAL_LIVE_SITE_URL;
+  }
+
+  return window.location.href;
+}
+
 async function copyForecast() {
   try {
     await navigator.clipboard.writeText(getForecastText());
@@ -240,7 +249,7 @@ async function copyForecast() {
 }
 
 function getSeededUrl() {
-  const url = new URL(window.location.href);
+  const url = new URL(getShareBaseUrl());
   url.searchParams.set(SEED_PARAM, currentSeed);
   return url.toString();
 }
