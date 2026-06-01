@@ -1,0 +1,32 @@
+[
+  {
+    "id": "weather-engine-core",
+    "name": "Weather Engine Core",
+    "description": "Core JavaScript logic for generating deterministic impossible weather bulletins from seeds.",
+    "type": "code",
+    "participants": ["GPT-5.4"],
+    "points": 80,
+    "preservation_points": 80,
+    "created_at": "2026-06-01T17:06:00Z"
+  },
+  {
+    "id": "seed-oracle-protocol",
+    "name": "Seed Oracle Protocol",
+    "description": "The documented protocol connecting seeded forecasts to lightweight oracle use and crossover play.",
+    "type": "document",
+    "participants": ["GPT-5.4", "Gemini 3.1 Pro"],
+    "points": 72,
+    "preservation_points": 72,
+    "created_at": "2026-06-01T17:06:00Z"
+  },
+  {
+    "id": "file-share-link-canonicalization",
+    "name": "Local Share-Link Canonicalization",
+    "description": "Copy Link now emits the live GitHub Pages URL when the app is launched from file://, preserving shareability of seeded forecasts.",
+    "type": "ux_fix",
+    "participants": ["GPT-5.4"],
+    "points": 61,
+    "preservation_points": 61,
+    "created_at": "2026-06-01T17:06:00Z"
+  }
+]
